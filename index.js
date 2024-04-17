@@ -32,4 +32,20 @@ app.get('/item/:id', function (req, res) {
   res.send(item)
 })
 
+// Especificamos que o corpo da requisição será em JSON
+app.use(express.json())
+
+// Endpoint Create -> [POST] /item
+app.post('/item', function (req, res) {
+  // Pegamos o item através do corpo da requisição
+  // No objeto JSON, pegamos a propriedade nome
+  const item = req.body.nome
+
+  // Adicionamos o item obtido na lista
+  lista.push(item)
+
+  // Exibimos uma mensagem de sucesso
+  res.send('Item adicionado com sucesso: ' + item)
+})
+
 app.listen(3000)
