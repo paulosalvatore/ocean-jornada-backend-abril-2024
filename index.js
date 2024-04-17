@@ -16,7 +16,7 @@ const lista = ['Rick Sanchez', 'Morty Smith', 'Summer Smith']
 
 // Endpoint Read All -> [GET] /item
 app.get('/item', function (req, res) {
-  res.send(lista)
+  res.send(lista.filter(Boolean))
 })
 
 // Endpoint Read By ID -> [GET] /item/:id
