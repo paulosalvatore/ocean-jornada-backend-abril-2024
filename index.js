@@ -21,7 +21,7 @@ async function main() {
     res.send('Olá, mundo!')
   })
 
-  // Lista de Itens
+  // Lista de Itens (Array)
   const lista = ['Rick Sanchez', 'Morty Smith', 'Summer Smith']
   //              0               1              2
 
@@ -29,8 +29,12 @@ async function main() {
   const collection = db.collection('item')
 
   // Endpoint Read All -> [GET] /item
-  app.get('/item', function (req, res) {
-    res.send(lista.filter(Boolean))
+  app.get('/item', async function (req, res) {
+    // Buscamos todos os documentos na collection
+    const itens = await collection.find().toArray()
+
+    // Enviamos como resposta
+    res.send(itens)
   })
 
   // Endpoint Read By ID -> [GET] /item/:id
