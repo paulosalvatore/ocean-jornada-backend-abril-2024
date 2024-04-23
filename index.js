@@ -71,13 +71,16 @@ async function main() {
     const id = req.params.id
 
     // Obtemos o corpo da requisição para saber qual o novo valor
-    const novoItem = req.body.nome
+    const novoItem = req.body
 
-    // Atualizamos o item na lista
-    lista[id - 1] = novoItem
+    // Atualizamos o item na collection
+    collection.updateOne(
+      { _id: new ObjectId(id) },
+      { $set: novoItem }
+    )
 
     // Enviamos uma mensagem de sucesso
-    res.send('Item atualizado com sucesso: ' + id + '. ' + novoItem)
+    res.send('Item atualizado com sucesso: ' + id)
   })
 
   // Endpoint Delete -> [DELETE] /item/:id
