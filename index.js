@@ -63,6 +63,10 @@ async function main() {
     // Pegamos o item através do corpo da requisição
     const item = req.body
 
+    if (!item.nome) {
+      return res.status(400).send("Corpo da requisição sem o campo 'nome'.")
+    }
+
     // Adicionamos o item obtido na collection
     await collection.insertOne(item)
 
