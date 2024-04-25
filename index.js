@@ -47,6 +47,10 @@ async function main() {
     // e colocamos na variável item
     const item = await collection.findOne({ _id: new ObjectId(id) })
 
+    if (!item) {
+      return res.status(404).send('Item não encontrado.')
+    }
+
     // Enviamos para a resposta o item acessado
     res.send(item)
   })
