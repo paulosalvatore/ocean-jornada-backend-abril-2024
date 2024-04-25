@@ -67,7 +67,7 @@ async function main() {
     await collection.insertOne(item)
 
     // Exibimos o item adicionado
-    res.send(item)
+    res.status(201).send(item)
   })
 
   // Endpoint Update -> [PUT] /item/:id
