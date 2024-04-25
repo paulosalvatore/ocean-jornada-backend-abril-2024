@@ -106,7 +106,11 @@ async function main() {
     const id = req.params.id
 
     // Removemos o item da collection
-    await collection.deleteOne({ _id: new ObjectId(id) })
+    const deleteResult = await collection.deleteOne({ _id: new ObjectId(id) })
+    
+    if (deleteResult.deletedCount === 0) {
+      return res.status(404).send("Item não encontrado.")
+    }
 
     // Exibimos uma mensagem de sucesso
     res.send('Item removido com sucesso: ' + id)
