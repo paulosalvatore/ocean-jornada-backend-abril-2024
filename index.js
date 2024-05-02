@@ -1,6 +1,7 @@
 require('dotenv').config()
 const express = require('express')
 const { MongoClient, ObjectId } = require('mongodb')
+const cors = require('cors')
 
 const dbUrl = process.env.DATABASE_URL
 const dbName = 'ocean-jornada-backend'
@@ -12,6 +13,8 @@ async function main() {
   console.log('Banco de dados conectado com sucesso!')
 
   const app = express()
+
+  app.use(cors())
 
   app.get('/', function (req, res) {
     res.send('Hello World')
@@ -107,7 +110,7 @@ async function main() {
 
     // Removemos o item da collection
     const deleteResult = await collection.deleteOne({ _id: new ObjectId(id) })
-    
+
     if (deleteResult.deletedCount === 0) {
       return res.status(404).send("Item não encontrado.")
     }
