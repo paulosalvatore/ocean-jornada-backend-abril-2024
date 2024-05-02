@@ -66,8 +66,8 @@ async function main() {
     // Pegamos o item através do corpo da requisição
     const item = req.body
 
-    if (!item.nome) {
-      return res.status(400).send("Corpo da requisição sem o campo 'nome'.")
+    if (!item || !item.name || !item.image) {
+      return res.status(400).send("Corpo da requisição sem o campo 'name' e/ou 'image'.")
     }
 
     // Adicionamos o item obtido na collection
@@ -85,8 +85,8 @@ async function main() {
     // Obtemos o corpo da requisição para saber qual o novo valor
     const novoItem = req.body
 
-    if (!novoItem.nome) {
-      return res.status(400).send("Corpo da requisição sem o campo 'nome'.")
+    if (!novoItem || !novoItem.name || !novoItem.image) {
+      return res.status(400).send("Corpo da requisição sem o campo 'name' e/ou 'image'.")
     }
 
     // Atualizamos o item na collection
